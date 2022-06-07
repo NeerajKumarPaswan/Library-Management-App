@@ -1,5 +1,7 @@
 package com.ty.library.service;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -22,11 +24,12 @@ public class StudentService {
 		return studentDao.getStudentById(id);
 	}
 	
-	public boolean issueBookByStudentBook(Student student,Book book) {
+	public boolean issueBookByStudentBook(Student student,List <Book> book) {
+		
 		return studentDao.issueBookByStudentBook(student, book);
 		
 	}
-	public boolean returnBookByStudentBookId(Student student,Book book) {
+	public boolean returnBookByStudentBookId(Student student,List <Book> book) {
 		return studentDao.returnBookByStudentBookId(student, book);
 	}
 }

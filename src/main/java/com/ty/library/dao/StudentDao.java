@@ -1,5 +1,7 @@
 package com.ty.library.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -28,38 +30,41 @@ public class StudentDao {
 		return entityManager.find(Student.class, id);
 	}
 	
-	public boolean issueBookByStudentBook(Student student,Book book) {
+	public boolean issueBookByStudentBook(Student student,List <Book> book) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("vikas");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
-        if(student!=null && book!=null) {  
-		entityTransaction.begin();
-		entityManager.merge(student);
-		entityManager.merge(book);
-		
-		entityTransaction.commit();
-        return true;
-        }else {
-        	return false;	
-        }
-		
-	}
-	
-	public boolean returnBookByStudentBookId(Student student,Book book) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("vikas");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-        if(student!=null && book!=null) {  
-        	   Student s= book.getStudent();
-        	  System.out.println(s.getName());
-		
-        	entityTransaction.begin();
-		   entityManager.merge(book);
-		  System.out.println("Reaching");
-		   entityTransaction.commit();
-		return true;
-	}else {
+		for(Book b:book) {
+			if(student!=null && b!=null) {  
+				entityTransaction.begin();
+				entityManager.merge(student);
+				entityManager.merge(b);
+				entityTransaction.commit();
+		        
+			}
+		return true;	       
+		}
 		return false;
-	}
+		}
+	
+	public boolean returnBookByStudentBookId(Student student,List <Book> book) {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("vikas");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		for(Book b: book) {
+			if(b!=null && student!=null) {
+				
+			//b.setStudent(null);
+			entityTransaction.begin();
+			entityManager.merge(b);
+			entityManager.merge(student);
+			entityTransaction.commit();
+				System.out.println("Returned");
+			} 
+		return true;
+	} 
+	         return false;
+	
 	}
 }

@@ -18,7 +18,7 @@ public class Book {
 	private String bookName;
 	private String bookAuthor;
 	private String bookGenre;
-	@OneToOne
+	@ManyToOne
 	private Student student;
 
 	public int getId() {

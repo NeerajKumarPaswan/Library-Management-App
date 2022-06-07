@@ -1,6 +1,8 @@
 package com.ty.library.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +27,10 @@ public class AddBookInLibrary extends HttpServlet {
 		book.setBookName(bookName);
 		book.setBookAuthor(bookAuthor);
 		book.setBookGenre(bookGenre);
+		
+		List<Book> books=new ArrayList();
+		books.add(book);
+		
 		
 		BookService bookService=new BookService();
 		Book b=	bookService.saveBook(book);

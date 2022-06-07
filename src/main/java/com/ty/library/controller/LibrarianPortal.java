@@ -37,12 +37,13 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 				 
 			 }else
 				 if(bookHistory!=null) {
-					 RequestDispatcher requestDispatcher = req.getRequestDispatcher("bookIssuePortal.jsp");
+					 RequestDispatcher requestDispatcher = req.getRequestDispatcher("booksDatabase.jsp");
 						requestDispatcher.forward(req, resp);
 					  
-					 System.out.println("Get all books in databse");
 				 }else {
-					 System.out.println("wrong choice");
+					 RequestDispatcher requestDispatcher = req.getRequestDispatcher("liblogin.jsp");
+						requestDispatcher.forward(req, resp);
+					  
 				 }
  
  

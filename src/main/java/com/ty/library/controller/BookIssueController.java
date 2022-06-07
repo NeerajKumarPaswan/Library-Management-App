@@ -1,6 +1,8 @@
 package com.ty.library.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,23 +30,47 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
    Student student=studentService.getStudentById(sid);
    
    BookService bookService=new BookService();  
-   Book book=bookService.getBookById(bid);
-   book.setStudent(student);
-   student.setBooks(book);
-   
-   boolean a=studentService.issueBookByStudentBook(student, book);
-   if(a==true) {
-	   System.out.println("Book issued");
-	   RequestDispatcher requestDispatcher=req.getRequestDispatcher("bookIssuedSuccessfully.jsp");
-		requestDispatcher.forward(req, resp);
-
-   }else {
-	   System.out.println("Book not issued");
-	   RequestDispatcher requestDispatcher=req.getRequestDispatcher("bookIssuePortal.jsp");
-		requestDispatcher.forward(req, resp);
-
+   List<Book> book=bookService.getAllBooks();
+  
+   for(Book b:book) {
+	   if(b.getId()==bid) {
+		 
+		   Book b1=bookService.getBookById(bid);
+		  b1.setStudent(student);
+		  
+		  List<Book> b2=new ArrayList();
+		  b2.add(b1);
+		  
+		  student.setBooks(b2);
+		  boolean a=studentService.issueBookByStudentBook(student, b2);
+		  if(a==true) {
+			  RequestDispatcher requestDispatcher=req.getRequestDispatcher("bookIssuedSuccessfully.jsp");
+		      requestDispatcher.forward(req, resp);
+		  
+		  }else {
+			  System.out.println("Book not issued");
+			   RequestDispatcher requestDispatcher=req.getRequestDispatcher("bookIssuePortal.jsp");
+				requestDispatcher.forward(req, resp);
+		  }
+	   }
    }
    
+   
+   
+    
+ 
+//   if(a==true) {
+//	   System.out.println("Book issued");
+//	   RequestDispatcher requestDispatcher=req.getRequestDispatcher("bookIssuedSuccessfully.jsp");
+//		requestDispatcher.forward(req, resp);
+//
+//   }else {
+//	   System.out.println("Book not issued");
+//	   RequestDispatcher requestDispatcher=req.getRequestDispatcher("bookIssuePortal.jsp");
+//		requestDispatcher.forward(req, resp);
+//
+//   }
+//   
   }
 
 }

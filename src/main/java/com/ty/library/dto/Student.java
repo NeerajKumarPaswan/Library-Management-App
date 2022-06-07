@@ -19,8 +19,8 @@ public class Student {
 	private String phone;
 	private String email;
 	private String password;
-	@OneToOne(mappedBy = "student")
-	private Book books;
+	@OneToMany(mappedBy = "student")
+	private List<Book> books;
 
 	public int getId() {
 		return id;
@@ -62,11 +62,19 @@ public class Student {
 		this.password = password;
 	}
 
-	public Book getBooks() {
+	public List<Book> getBooks() {
 		return books;
 	}
 
-	public void setBooks(Book books) {
+	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
-}
+
+	@Override
+	public String toString() {
+		return "Student Id:"+ id + ", name:" + name ;
+	}
+
+	
+ 
+	}
