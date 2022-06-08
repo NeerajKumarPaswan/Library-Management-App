@@ -17,6 +17,9 @@
         
         <input type ="submit" name="bookHistory" value ="Book Issued History"> </input> <br> <br>
         
+          <input type ="submit" name="listBookIssue" value ="List of books available"> </input> <br> <br>
+        
+          <input type ="submit" name="listBookReturn" value ="Book Return History"> </input> <br> <br>
         
 
 

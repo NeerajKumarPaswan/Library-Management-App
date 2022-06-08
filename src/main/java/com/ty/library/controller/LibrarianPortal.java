@@ -19,7 +19,8 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 	 String bookReturned=req.getParameter("addBook");
 	 String bookIssued=req.getParameter("removeBook");
 	 String bookHistory=req.getParameter("bookHistory");
-	 
+	 String listBookIssue=req.getParameter("listBookIssue");
+	 String listBookReturn=req.getParameter("listBookReturn");
 	 if(addBook!=null) {
 		 RequestDispatcher requestDispatcher = req.getRequestDispatcher("insertBookInLibrary.jsp");
 			requestDispatcher.forward(req, resp);
@@ -40,10 +41,22 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 					 RequestDispatcher requestDispatcher = req.getRequestDispatcher("booksDatabase.jsp");
 						requestDispatcher.forward(req, resp);
 					  
+				 }else 
+				 if(listBookIssue!=null)
+				 {
+					 RequestDispatcher requestDispatcher = req.getRequestDispatcher("listBookIssue.jsp");
+					requestDispatcher.forward(req, resp);
+					  
+				 }else
+					 if(listBookReturn!=null)
+				 {
+					 RequestDispatcher requestDispatcher = req.getRequestDispatcher("listBookReturn.jsp");
+					requestDispatcher.forward(req, resp);
+					  
 				 }else {
 					 RequestDispatcher requestDispatcher = req.getRequestDispatcher("liblogin.jsp");
 						requestDispatcher.forward(req, resp);
-					  
+					 
 				 }
  
  
